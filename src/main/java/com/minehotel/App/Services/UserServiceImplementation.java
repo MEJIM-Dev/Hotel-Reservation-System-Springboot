@@ -38,7 +38,6 @@ public class UserServiceImplementation implements UserCrudServices{
         AppUser user = userRepo.findByEmail(userEmail);
         Role role = roleRepo.findByName(roleName);
         user.getRoles().add(role);
-
     }
 
     @Override
@@ -47,7 +46,7 @@ public class UserServiceImplementation implements UserCrudServices{
     }
 
     @Override
-    public List<AppUser> getUsers(String email) {
+    public List<AppUser> getUsers() {
         return userRepo.findAll();
     }
 }

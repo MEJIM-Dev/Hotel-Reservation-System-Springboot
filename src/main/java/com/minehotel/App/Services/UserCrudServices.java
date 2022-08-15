@@ -11,6 +11,6 @@ public interface UserCrudServices {
     Role saveRole(Role role);
     void assignUserRole(String roleName, String userEmail);
     AppUser getUserByEmail(String email);
-    List<AppUser> getUsers(String email);
+    List<AppUser> getUsers();
 
 }

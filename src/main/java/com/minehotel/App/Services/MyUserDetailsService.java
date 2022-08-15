@@ -1,6 +1,8 @@
 package com.minehotel.App.Services;
 
 import com.minehotel.App.Entity.AppUser;
+import com.minehotel.App.Exceptions.UserNotFoundException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -17,8 +19,9 @@ public class MyUserDetailsService implements UserDetailsService {
     @Autowired
     private UserServiceImplementation userImpl;
 
+    @SneakyThrows
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         AppUser user = userImpl.getUserByEmail(username);
 
         if(user==null){

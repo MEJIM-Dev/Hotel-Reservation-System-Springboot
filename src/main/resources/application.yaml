@@ -1,0 +1,8 @@
+spring
+  datasource
+    url=jdbc:mysql://localhost:3306/march
+    password=taskmastarh
+    username=taskmastarh
+  jpa
+    show-sql=true
+    properties.hibernate.show_syntax=true

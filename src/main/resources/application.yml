@@ -11,3 +11,7 @@ spring:
     user:
       name: me
       password: 12345
+server:
+  error:
+    path: /error
+    whitelabel.enable: false

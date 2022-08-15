@@ -1,5 +1,6 @@
 package com.minehotel.App.Configurations;
 
+import com.minehotel.App.Filters.JwtAuthFilter;
 import com.minehotel.App.Services.MyUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,12 +12,18 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.NoOpPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
 
 @EnableWebSecurity
 public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private MyUserDetailsService userDetailsService;
+
+    @Autowired
+    private JwtAuthFilter jwtAuthFilter;
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -25,6 +32,8 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(STATELESS);
         http.authorizeHttpRequests()
                 .antMatchers("/","/")
                 .permitAll()
@@ -32,6 +41,7 @@ public class SpringSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authenticated()
                 .and()
                 .formLogin();
+        http.addFilter(jwtAuthFilter);
     }
 
     @Override

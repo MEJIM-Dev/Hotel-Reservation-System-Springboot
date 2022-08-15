@@ -7,10 +7,10 @@ spring:
     show-sql: true
     hibernate.ddl-auto: update
     properties.hibernate.show_syntax: true
-  security:
-    user:
-      name: me
-      password: 12345
+#  security:
+#    user:
+#      name: me
+#      password: 12345
 server:
   error:
     path: /error
